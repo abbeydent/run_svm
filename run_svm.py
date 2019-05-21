@@ -18,6 +18,25 @@ plt.savefig('scatterplot.png')
 svm_model = SVC(kernel = 'linear', C = 1E10)
 svm_model.fit(X,Y)
 
+def plot_decision_function(model):
+	ax = plt.gca()
+	xlim = ax.get_xlim()
+	ylim = ax.get_ylim()
+
+	x = np.linspace(xlim[0], xlim[1], 30)
+	y = np.linspace(ylim[0], ylim[1], 30)
+	Y, X = np.meshgrid(y,x)
+	xy = np.vstack([X.ravel(), Y.ravel()]).T
+	P = model.decision_function(xy).reshape(X.shape)
+	ax.contour(X, Y, P, colors = 'k',
+		levels = [-1, 0, 1], alpha = 0.5,
+		linestyles = ['--', '-', '--'])
+	ax.scatter(model.support_vectors_[:,0],
+		model.support_vectors_[:,1],
+		s = 300, linewidth = 1, facecolors = 'none');
+	ax.set_xlim(xlim)
+	ax.set_ylim(ylim)
+
 
 
 
