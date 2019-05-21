@@ -37,6 +37,11 @@ def plot_decision_function(model):
 	ax.set_xlim(xlim)
 	ax.set_ylim(ylim)
 
+plot_decision_function(svm_model)
+plt.savefig('scatterplot_with_decision_function.png')
+
+
+
 
 
 
